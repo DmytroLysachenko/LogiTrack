@@ -1,6 +1,8 @@
 using LogiTrack.Models;
 using Microsoft.EntityFrameworkCore;
 
+namespace LogiTrack.Context;
+
 public class LogiTrackContext : DbContext
 {
     public LogiTrackContext(DbContextOptions<LogiTrackContext> options)
@@ -8,4 +10,13 @@ public class LogiTrackContext : DbContext
 
     public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
     public DbSet<Order> Orders => Set<Order>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder
+            .Entity<Order>()
+            .HasMany(order => order.Items)
+            .WithOne(item => item.Order)
+            .HasForeignKey(item => item.OrderId);
+    }
 }

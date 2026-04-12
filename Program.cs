@@ -1,3 +1,5 @@
+using LogiTrack.Context;
+using LogiTrack.Data;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,6 +12,8 @@ builder.Services.AddDbContext<LogiTrackContext>(options =>
 );
 
 var app = builder.Build();
+
+DataSeeder.Seed(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

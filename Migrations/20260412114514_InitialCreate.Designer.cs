@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace LogiTrack.Migrations
 {
-    [DbContext(typeof(LogiTrackContext))]
+    [DbContext(typeof(LogiTrack.Context.LogiTrackContext))]
     [Migration("20260412114514_InitialCreate")]
     partial class InitialCreate
     {
