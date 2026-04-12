@@ -1,20 +1,15 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 namespace LogiTrack.Models
 {
     public class InventoryItem
     {
-        static int ItemId;
-        static string Name;
-        static int Quantity;
-        static string Location;
+        public int InventoryItemId { get; set; }
+        public string Name { get; set; } = string.Empty;
+        public int Quantity { get; set; }
+        public string Location { get; set; } = string.Empty;
 
-        static string DisplayInfo()
+        public string DisplayInfo()
         {
-            return $"{Name} | Quantity:{Quantity} | Location: {Location}";
+            return $"{Name} | Quantity: {Quantity} | Location: {Location}";
         }
     }
 }

@@ -1,35 +1,35 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http.Features;
-
 namespace LogiTrack.Models
 {
     public class Order
     {
-        static int OrderId;
+        public int OrderId { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
+        public DateTime DatePlaced { get; set; } = DateTime.UtcNow;
+        public List<InventoryItem> Items { get; set; } = new();
 
-        static string CustomerName;
-
-        static DateTime DatePlaced;
-
-        static List<InventoryItem> List;
-
-        static void AddItem(InventoryItem item)
+        public void AddItem(InventoryItem item)
         {
-            List.Add(item);
+            Items.Add(item);
         }
 
-        static void RemoveItem(int itemId)
+        public bool RemoveItem(int inventoryItemId)
         {
-            InventoryItem itemToRemove = List.Find();
-            List.Remove(itemToRemove);
+            InventoryItem? itemToRemove = Items.FirstOrDefault(item =>
+                item.InventoryItemId == inventoryItemId
+            );
+
+            if (itemToRemove is null)
+            {
+                return false;
+            }
+
+            Items.Remove(itemToRemove);
+            return true;
         }
 
-        static string GetOrderSummary(int OrderId)
+        public string GetOrderSummary()
         {
-            return $"Order #{OrderId} for {CustomerName} | Items: {List.Count} | Placed: {DatePlaced.ToShortDateString()}";
+            return $"Order #{OrderId} for {CustomerName} | Items: {Items.Count} | Placed: {DatePlaced.ToShortDateString()}";
         }
     }
 }
