@@ -1,9 +1,14 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace LogiTrack.Models
 {
     public class Order
     {
         public int OrderId { get; set; }
+
+        [Required]
         public string CustomerName { get; set; } = string.Empty;
+
         public DateTime DatePlaced { get; set; } = DateTime.UtcNow;
         public List<InventoryItem> Items { get; set; } = new();
 
